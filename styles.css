@@ -134,4 +134,6 @@ button:disabled{
 
 .red-text{
     color: red; 
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
 }
