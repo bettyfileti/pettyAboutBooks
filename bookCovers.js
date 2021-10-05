@@ -11,6 +11,8 @@ let imgX;
 let imgY;
 let newImg;
 
+let timeToFinishTheCover = false;
+
 let url = urlStart + urlMid + urlEnd;
 let imageContainer = document.getElementById("img-container")
 // url = url + "lists/current/hardcover-fiction.json";
@@ -41,7 +43,8 @@ flowButtonDisplay.addEventListener('click', function () {
     console.log("flowCount:", flowCount);
     flowCount += 1;
     if (flowCount === flows.length) {
-        console.log("Too high");
+        console.log("All the flows have run");
+        timeToFinishTheCover = true;
         flowCount = 0;
     }
 
@@ -161,16 +164,20 @@ function setup() {
 }
 
 function draw() {
-
-    let runningFunction = flows[flowCount];
-    runningFunction();
+    
+    if (timeToFinishTheCover){
+        finishTheCover();
+    } else {
+        let runningFunction = flows[flowCount];
+        runningFunction();
+    }
 
 }
 
 //--------------------------------------------------------------
 function scribbleOnImage() {
     if (mouseIsPressed) {
-        flowButtonDisplay.disabled = false;
+        flowButtonDisplay.style.display = "flex";
         push();
         stroke("red");
         strokeWeight(2);
@@ -182,7 +189,12 @@ function scribbleOnImage() {
 //--------------------------------------------------------------
 //Erase Image Function
 function eraseImage() {
+    if (flowStart){
+        flowButtonDisplay.style.display = "none";
+        flowStart = false;
+    }
     if (mouseIsPressed) {
+        flowButtonDisplay.style.display = "flex";
         push();
         stroke(backgroundColor);
         strokeWeight(20);
@@ -194,7 +206,8 @@ function eraseImage() {
 //--------------------------------------------------------------
 function addStickers() {
     if (flowStart) {
-        captureStartImage();
+        flowButtonDisplay.style.display = "none";
+        captureStartImage();        
     } else {
         for (let sticker of stickers) {
             sticker.over();
@@ -276,6 +289,7 @@ function mousePressed() {
     let currentFlow = flows[flowCount].name;
 
     if (currentFlow === "addStickers") {
+        flowButtonDisplay.style.display = "flex";
         for (let sticker of stickers) {
             sticker.pressed();
         }
@@ -322,6 +336,8 @@ function pasteCopies() {
 //--------------------------------------------------------------
 let focusSize = 10;
 function smearImage() {
+    fill("white");
+    rect(imgX-100, imgY, 200, img.height*2); //This is not a permanent solution!
     noFill();
     if (mouseIsPressed) {
         let pixelArray = get(mouseX, mouseY, focusSize, focusSize);
@@ -338,4 +354,11 @@ function smearImage() {
 function captureStartImage() {
     startImage = get();
     flowStart = false;
+}
+
+//--------------------------------------------------------------
+function finishTheCover(){
+    console.log("finishing");
+    flowButtonDisplay.style.display = "none";
+    feelingsDisplay.innerHTML = "It wasn't that good in the first place."
 }

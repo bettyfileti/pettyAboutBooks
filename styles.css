@@ -45,6 +45,8 @@ button{
     line-height: 16px;
     text-align: center;
     color: #FFFFFF;
+
+    display: none;
 }
 
 button:hover{
@@ -128,6 +130,7 @@ button:disabled{
 }
 
 .button-container, .feelings-container{
+    height: 52px;
     display: flex;
     justify-content: center;
 }
