@@ -91,7 +91,7 @@ button:disabled{
 }
 
 .books-title{
-    height: 80px;
+    height: 64px;
     display: flex;
     align-items: flex-end;
     border-bottom-style: solid;
@@ -130,4 +130,8 @@ button:disabled{
 .button-container, .feelings-container{
     display: flex;
     justify-content: center;
+}
+
+.red-text{
+    color: red; 
 }
