@@ -51,6 +51,10 @@ button:hover{
     background-color: #3C5D73;
 }
 
+button:disabled{
+    background-color: lightgray;
+}
+
 /* //-------------------------------------------------------------- */
 /* Classes */
 .container{

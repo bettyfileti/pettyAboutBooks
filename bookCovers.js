@@ -157,6 +157,7 @@ function setup() {
     stickers.push(new Sticker(sticker1, 0, imgX - (sticker1.width * .3), imgY + 100 * 0));
     stickers.push(new Sticker(sticker2, 1, imgX - (sticker2.width * .3), imgY + 100 * 1));
     stickers.push(new Sticker(sticker3, 2, imgX - (sticker3.width * .3), imgY + 100 * 2));
+
 }
 
 function draw() {
@@ -169,6 +170,7 @@ function draw() {
 //--------------------------------------------------------------
 function scribbleOnImage() {
     if (mouseIsPressed) {
+        flowButtonDisplay.disabled = false;
         push();
         stroke("red");
         strokeWeight(2);
